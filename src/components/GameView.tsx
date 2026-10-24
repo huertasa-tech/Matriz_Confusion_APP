@@ -135,9 +135,9 @@ export const GameView: React.FC<GameViewProps> = ({
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* Scenario Bar & Score Strip */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-lg">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-3xl bg-white border border-slate-200 shadow-sm">
         {/* Scenario Switcher */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-950 rounded-xl border border-slate-800/80 overflow-x-auto">
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-2xl border border-slate-200 overflow-x-auto">
           {scenarioButtons.map((btn) => (
             <button
               key={btn.id}
@@ -146,10 +146,10 @@ export const GameView: React.FC<GameViewProps> = ({
                 onScenarioChange(btn.id);
                 handleRestartRound();
               }}
-              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-bold rounded-xl whitespace-nowrap transition-colors ${
                 scenarioId === btn.id
-                  ? 'bg-indigo-600 text-white shadow'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
               }`}
             >
               {btn.icon}
@@ -159,48 +159,48 @@ export const GameView: React.FC<GameViewProps> = ({
         </div>
 
         {/* Live Score & Streak */}
-        <div className="flex items-center gap-4 text-xs font-mono">
-          <div className="flex items-center gap-1.5 text-amber-400 bg-amber-950/40 border border-amber-800/40 px-3 py-1.5 rounded-lg">
-            <Trophy className="w-4 h-4" />
-            <span>Puntos: <strong className="text-white text-sm tabular-nums">{score}</strong></span>
+        <div className="flex items-center gap-3 text-xs font-mono">
+          <div className="flex items-center gap-1.5 text-amber-900 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded-xl font-bold">
+            <Trophy className="w-4 h-4 text-amber-600" />
+            <span>Puntos: <strong className="text-slate-900 text-sm tabular-nums">{score}</strong></span>
           </div>
 
-          <div className="flex items-center gap-1.5 text-rose-400 bg-rose-950/40 border border-rose-800/40 px-3 py-1.5 rounded-lg">
-            <Flame className="w-4 h-4" />
-            <span>Racha: <strong className="text-white text-sm tabular-nums">{streak}</strong></span>
+          <div className="flex items-center gap-1.5 text-rose-900 bg-rose-50 border border-rose-300 px-3 py-1.5 rounded-xl font-bold">
+            <Flame className="w-4 h-4 text-rose-600" />
+            <span>Racha: <strong className="text-slate-900 text-sm tabular-nums">{streak}</strong></span>
           </div>
 
           <button
             onClick={handleRestartRound}
             title="Reiniciar ronda de casos"
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
+            className="p-2 text-slate-500 hover:text-slate-800 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors border border-slate-200"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Main Interactive Split: Left (Case Player) / Right (Live Matrix & Progress) */}
+      {/* Main Interactive Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: The Case Deck (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="p-5 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl relative overflow-hidden">
+          <div className="p-5 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-sm relative overflow-hidden">
             {/* Header / Progress */}
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-semibold text-indigo-400 uppercase tracking-wider">
+                <span className="text-xs font-mono font-bold text-indigo-700 uppercase tracking-wider">
                   Caso {Math.min(currentIndex + 1, scenarioCases.length)} de {scenarioCases.length}
                 </span>
               </div>
-              <div className="text-xs text-slate-400 font-mono">
+              <div className="text-xs text-slate-500 font-mono font-bold">
                 Progreso: {Math.round(((currentIndex) / scenarioCases.length) * 100)}%
               </div>
             </div>
 
             {/* Progress bar line */}
-            <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden mb-5">
+            <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden mb-5">
               <div
-                className="bg-indigo-500 h-full transition-all duration-300"
+                className="bg-indigo-600 h-full transition-all duration-300 rounded-full"
                 style={{ width: `${((currentIndex) / scenarioCases.length) * 100}%` }}
               />
             </div>
@@ -209,53 +209,53 @@ export const GameView: React.FC<GameViewProps> = ({
               <div className="space-y-4">
                 {/* Case Title & Summary */}
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug">
+                  <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-snug">
                     {currentCase.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                  <p className="text-xs sm:text-sm text-slate-700 mt-2 leading-relaxed bg-slate-50 p-3.5 rounded-2xl border border-slate-200 font-medium">
                     {currentCase.summary}
                   </p>
                 </div>
 
                 {/* Clues / Features */}
                 <div>
-                  <h4 className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold mb-2">
+                  <h4 className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold mb-2">
                     Características observadas:
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-slate-300">
+                  <ul className="space-y-2 text-xs text-slate-700 font-medium">
                     {currentCase.clues.map((clue, idx) => (
-                      <li key={idx} className="flex items-start gap-2 bg-slate-950/40 p-2 rounded-lg border border-slate-800/60">
-                        <span className="text-indigo-400 font-mono font-bold">•</span>
+                      <li key={idx} className="flex items-start gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                        <span className="text-indigo-600 font-mono font-bold">•</span>
                         <span>{clue}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Ground truth prompt question */}
-                <div className="pt-2 text-center text-xs text-slate-300 font-medium">
+                {/* Question */}
+                <div className="pt-2 text-center text-xs text-slate-700 font-bold">
                   ¿Cómo clasificas este caso?
                 </div>
 
-                {/* Decision Buttons (If not yet decided) */}
+                {/* Decision Buttons */}
                 {!lastResult ? (
                   <div className="grid grid-cols-2 gap-3 pt-1">
                     <button
                       onClick={() => handleDecision(true)}
-                      className="py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-indigo-600/30 flex flex-col items-center gap-1"
+                      className="py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-xs sm:text-sm transition-all shadow-md shadow-indigo-100 flex flex-col items-center gap-1"
                     >
                       <span>Clasificar como</span>
-                      <span className="text-[11px] font-normal opacity-90 truncate max-w-full">
+                      <span className="text-[11px] font-medium opacity-90 truncate max-w-full">
                         POSITIVO (+)
                       </span>
                     </button>
 
                     <button
                       onClick={() => handleDecision(false)}
-                      className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-100 font-bold text-xs sm:text-sm transition-all border border-slate-700 flex flex-col items-center gap-1"
+                      className="py-3 px-4 rounded-2xl bg-white hover:bg-slate-50 active:scale-95 text-slate-800 font-extrabold text-xs sm:text-sm transition-all border-2 border-slate-300 shadow-2xs flex flex-col items-center gap-1"
                     >
                       <span>Clasificar como</span>
-                      <span className="text-[11px] font-normal opacity-90 truncate max-w-full">
+                      <span className="text-[11px] font-medium text-slate-600 truncate max-w-full">
                         NEGATIVO (-)
                       </span>
                     </button>
@@ -263,44 +263,44 @@ export const GameView: React.FC<GameViewProps> = ({
                 ) : (
                   /* Feedback Reveal Card */
                   <div
-                    className={`p-4 rounded-xl border animate-in zoom-in-95 duration-200 ${
+                    className={`p-4 rounded-2xl border animate-in zoom-in-95 duration-200 ${
                       lastResult.isCorrect
-                        ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-200'
-                        : 'bg-rose-950/40 border-rose-500/50 text-rose-200'
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
+                        : 'bg-rose-50 border-rose-300 text-rose-950'
                     }`}
                   >
                     <div className="flex items-center gap-2 font-bold text-sm mb-1">
                       {lastResult.isCorrect ? (
                         <>
-                          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                          <span>¡Decisión Correcta!</span>
+                          <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                          <span className="text-emerald-900 font-extrabold">¡Decisión Correcta!</span>
                         </>
                       ) : (
                         <>
-                          <AlertTriangle className="w-5 h-5 text-rose-400" />
-                          <span>Error de Clasificación</span>
+                          <AlertTriangle className="w-5 h-5 text-rose-600" />
+                          <span className="text-rose-900 font-extrabold">Error de Clasificación</span>
                         </>
                       )}
-                      <span className="font-mono text-xs px-2 py-0.5 rounded bg-black/40 ml-auto uppercase font-bold">
+                      <span className="font-mono text-xs px-2.5 py-0.5 rounded-full bg-white border border-black/10 ml-auto uppercase font-bold shadow-2xs">
                         {lastResult.cellResult.toUpperCase()}
                       </span>
                     </div>
 
-                    <div className="text-xs space-y-1 text-slate-200 mt-2">
+                    <div className="text-xs space-y-1 text-slate-800 mt-2.5 font-medium">
                       <p>
                         <strong>Tu predicción:</strong> {lastResult.userPrediction ? 'Positivo (+)' : 'Negativo (-)'}
                       </p>
                       <p>
                         <strong>Realidad objetiva:</strong> {lastResult.actualPositive ? 'Positivo (Condición presente)' : 'Negativo (Condición ausente)'}
                       </p>
-                      <p className="pt-2 text-xs leading-relaxed text-slate-300 border-t border-white/10">
+                      <p className="pt-2 text-xs leading-relaxed text-slate-700 border-t border-black/10">
                         {lastResult.explanation}
                       </p>
                     </div>
 
                     <button
                       onClick={handleNextCase}
-                      className="w-full mt-4 py-2.5 px-4 rounded-lg bg-white text-slate-900 font-bold text-xs hover:bg-slate-200 transition-colors flex items-center justify-center gap-2"
+                      className="w-full mt-4 py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs"
                     >
                       <span>Siguiente caso</span>
                       <ArrowRight className="w-4 h-4" />
@@ -311,21 +311,21 @@ export const GameView: React.FC<GameViewProps> = ({
             ) : (
               /* Round Complete Card */
               <div className="text-center py-6 space-y-4 animate-in fade-in">
-                <div className="w-14 h-14 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                <div className="w-14 h-14 mx-auto rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700">
                   <Sparkles className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-white">¡Ronda de Casos Completada!</h3>
-                <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto">
+                <h3 className="text-xl font-extrabold text-slate-900">¡Ronda de Casos Completada!</h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto font-medium">
                   Has procesado todos los casos de este escenario. Mira en la matriz de la derecha cómo quedaron tus aciertos y errores.
                 </p>
 
-                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs max-w-xs mx-auto">
-                  Puntuación final: <strong className="text-emerald-400 text-sm">{score} pts</strong>
+                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 font-mono text-xs max-w-xs mx-auto">
+                  Puntuación final: <strong className="text-emerald-700 text-sm">{score} pts</strong>
                 </div>
 
                 <button
                   onClick={handleRestartRound}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 mx-auto"
+                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 mx-auto shadow-xs"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>Jugar otra ronda</span>
@@ -335,12 +335,12 @@ export const GameView: React.FC<GameViewProps> = ({
           </div>
 
           {/* Scenario Context Box */}
-          <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-xs text-slate-400 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-slate-300 font-semibold">
-              <HelpCircle className="w-4 h-4 text-indigo-400" />
+          <div className="p-4 rounded-3xl bg-indigo-50/60 border border-indigo-100 text-xs text-slate-700 space-y-1.5">
+            <div className="flex items-center gap-1.5 text-indigo-900 font-bold">
+              <HelpCircle className="w-4 h-4 text-indigo-600" />
               <span>Regla del Escenario: {scenario.title}</span>
             </div>
-            <p className="leading-relaxed">{scenario.contextNote}</p>
+            <p className="leading-relaxed font-medium">{scenario.contextNote}</p>
           </div>
         </div>
 

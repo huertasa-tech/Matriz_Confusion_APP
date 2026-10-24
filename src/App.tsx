@@ -46,7 +46,7 @@ export default function App() {
   const currentScenario = SCENARIOS[scenarioId];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
       {/* Top Navigation Bar */}
       <Header
         activeTab={activeTab}
@@ -103,16 +103,22 @@ export default function App() {
         onClose={() => setSelectedCell(null)}
       />
 
-      {/* Subtle Educational Footer */}
-      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+      {/* Educational Footer */}
+      <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 bg-white">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span>
-            MatrizLab · Herramienta interactiva de aprendizaje para analítica de datos y Machine Learning.
+          <span className="font-medium text-slate-600">
+            MatrizLab · Herramienta interactiva y amigable para aprender Machine Learning sin complicaciones.
           </span>
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>VP · VN · FP · FN</span>
+          <div className="flex items-center gap-4 text-slate-500 font-semibold">
+            <span className="text-emerald-700">VP</span>
             <span>·</span>
-            <span>Accuracy · Precision · Recall · Specificity · F1</span>
+            <span className="text-sky-700">VN</span>
+            <span>·</span>
+            <span className="text-amber-700">FP</span>
+            <span>·</span>
+            <span className="text-rose-700">FN</span>
+            <span>·</span>
+            <span className="text-indigo-700">Accuracy & F1</span>
           </div>
         </div>
       </footer>
