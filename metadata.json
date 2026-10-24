@@ -1,0 +1,6 @@
+{
+  "name": "MatrizLab: El Juego de la Matriz de Confusión",
+  "description": "Aprende qué es la matriz de confusión, cómo se interpreta y cómo cambian las métricas de Machine Learning a través de simulaciones, retos y juegos interactivos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
